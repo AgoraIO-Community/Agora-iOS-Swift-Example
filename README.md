@@ -28,6 +28,7 @@ The project will manage any number of hosts, and will always order them in an Nx
 - Xcode 11.0
 - CocoaPods
 - iOS Device (iOS 13.0 required due to use of SF Symbols)
+- A Token Server (see below)
 
 You'll need to install the Agora CocoaPod to run this app to generate the xcworkspace.<br>
 To do so, simply run `pod install`
