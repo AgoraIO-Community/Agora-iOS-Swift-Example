@@ -20,6 +20,12 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>So the audience and other broadcasters can see you</string>
+	<key>NSLocalNetworkUsageDescription</key>
+	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>So the audience and other broadcasters can hear you</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -41,12 +47,6 @@
 	<true/>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
-	<key>NSCameraUsageDescription</key>
-	<string>So the audience and other broadcasters can see you</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>So the audience and other broadcasters can hear you</string>
-	<key>NSLocalNetworkUsageDescription</key>
-	<string></string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
