@@ -88,6 +88,11 @@ extension ChannelViewController {
         }
     }
 
+    func updateToken(_ newToken: String) {
+        ChannelViewController.channelToken = newToken
+        self.agkit.renewToken(newToken)
+    }
+
     /// Leave the Agora channel and return to the main screen
     @objc func leaveChannel() {
         self.agkit.setupLocalVideo(nil)

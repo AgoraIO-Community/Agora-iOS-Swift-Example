@@ -73,4 +73,21 @@ extension ChannelViewController: AgoraRtcEngineDelegate {
             userVideoLookup.removeValue(forKey: uid)
         }
     }
+
+    func rtcEngine(
+        _ engine: AgoraRtcEngineKit,
+        tokenPrivilegeWillExpire token: String
+    ) {
+        AgoraToken.fetchToken(
+            urlBase: ChannelViewController.tokenBaseURL,
+            channelName: ChannelViewController.channelName,
+            userId: self.userID) { result in
+            switch result {
+            case .failure(let err):
+                fatalError("Could not refresh token: \(err)")
+            case .success(let newToken):
+                self.updateToken(newToken)
+            }
+        }
+    }
 }
