@@ -22,30 +22,8 @@ extension ChannelViewController {
         _ = self.getMicButton()
         _ = self.getFlipButton()
         _ = self.getBeautifyButton()
-
-        _ = self.getCloseButton()
-
-        _ = self.getHostButton()
     }
 
-    func getCloseButton() -> UIButton {
-        if let closeButton = self.closeButton {
-            return closeButton
-        }
-        guard let chevronSymbol = UIImage(systemName: "chevron.left") else {
-            fatalError("Could not create chevron.left symbol")
-        }
-        let button = UIButton.systemButton(with: chevronSymbol, target: self, action: #selector(leaveChannel))
-        self.view.addSubview(button)
-
-        button.translatesAutoresizingMaskIntoConstraints = false
-        [
-            button.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20),
-            button.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20)
-        ].forEach { $0.isActive = true}
-        self.closeButton = button
-        return button
-    }
 
     func getControlContainer() -> UIView {
         if let controlContainer = self.controlContainer {
@@ -53,16 +31,11 @@ extension ChannelViewController {
         }
         let container = UIView()
         self.view.addSubview(container)
-
-        container.translatesAutoresizingMaskIntoConstraints = false
-        [
-            container.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            container.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20),
-            container.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            container.heightAnchor.constraint(equalTo: self.view.heightAnchor)
-        ].forEach { $0.isActive = true }
-
-        container.isUserInteractionEnabled = true
+        container.frame = CGRect(
+            origin: CGPoint(x: 0, y: self.view.bounds.height - 100),
+            size: CGSize(width: self.view.bounds.width, height: 100)
+        )
+        container.autoresizingMask = [.flexibleTopMargin, .flexibleWidth]
         self.controlContainer = container
         return container
     }
@@ -165,6 +138,25 @@ extension ChannelViewController {
         return button
     }
 
+    func getCloseButton() -> UIButton {
+        if let closeButton = self.closeButton {
+            return closeButton
+        }
+        guard let chevronSymbol = UIImage(systemName: "chevron.left") else {
+            fatalError("Could not create chevron.left symbol")
+        }
+        let button = UIButton.systemButton(with: chevronSymbol, target: self, action: #selector(leaveChannel))
+        self.view.addSubview(button)
+
+        button.translatesAutoresizingMaskIntoConstraints = false
+        [
+            button.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            button.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20)
+        ].forEach { $0.isActive = true}
+        self.closeButton = button
+        return button
+    }
+
     func getHostButton() -> UIButton {
         if let hostButton = self.hostButton {
             return hostButton
@@ -173,17 +165,14 @@ extension ChannelViewController {
         button.setTitle("Host", for: .normal)
         button.setTitleColor(.label, for: .normal)
         button.setTitleColor(.secondaryLabel, for: .focused)
-        button.backgroundColor = .systemGray
         button.addTarget(self, action: #selector(toggleBroadcast), for: .touchUpInside)
         self.view.addSubview(button)
 
-        button.translatesAutoresizingMaskIntoConstraints = false
-        [
-            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            button.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 50),
-            button.widthAnchor.constraint(equalToConstant: 150),
-            button.heightAnchor.constraint(equalToConstant: 50)
-        ].forEach { $0.isActive = true }
+        button.frame = CGRect(
+            origin: CGPoint(x: self.view.bounds.midX - 75, y: 50),
+            size: CGSize(width: 150, height: 50)
+        )
+        button.autoresizingMask = [.flexibleLeftMargin, .flexibleRightMargin, .flexibleBottomMargin]
 
         button.backgroundColor = .systemRed
         button.layer.cornerRadius = 25

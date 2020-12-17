@@ -11,14 +11,12 @@ import AgoraRtcKit
 extension ChannelViewController {
 
     /// Setup the canvas and rendering for the device's local video
-    func setupAgoraVideo() {
-        if self.agkit.enableVideo() < 0 {
-            print("Could not enable video")
-            return
-        }
+    func setupLocalAgoraVideo() {
+        self.agoraVideoHolder.addSubview(self.localVideoView)
+        self.addVideoButtons()
         let videoCanvas = AgoraRtcVideoCanvas()
         videoCanvas.uid = self.userID
-        videoCanvas.view = videoView
+        videoCanvas.view = self.localVideoView
         videoCanvas.renderMode = .hidden
         self.agkit.setupLocalVideo(videoCanvas)
         userVideoLookup[self.userID] = videoCanvas
@@ -76,7 +74,7 @@ extension ChannelViewController {
 
     /// Join the pre-configured Agora channel
     @objc func joinChannel() {
-        self.setupAgoraVideo()
+        self.agkit.enableVideo()
         self.agkit.joinChannel(
             byToken: ChannelViewController.channelToken,
             channelId: ChannelViewController.channelName,
@@ -115,7 +113,6 @@ extension ChannelViewController {
         // We take on a grid of 4x4 (16).
         let maxSqrt = ceil(sqrt(CGFloat(vidCounts)))
         let multDim = 1 / maxSqrt
-        var prevView: UIView?
         for (idx, (_, canvas)) in userVideoLookup.enumerated() {
             guard let canView = canvas.view else {
                 continue
@@ -124,36 +121,20 @@ extension ChannelViewController {
             // clear the constraints.
             canView.removeFromSuperview()
             self.agoraVideoHolder.addSubview(canView)
-            [
-                // Set the width and height the same as the full area
-                // Multiplied by the precalculated multiplier
-                canView.widthAnchor.constraint(
-                    equalTo: self.view.safeAreaLayoutGuide.widthAnchor,
-                    multiplier: multDim
-                ), canView.heightAnchor.constraint(
-                    equalTo: self.view.safeAreaLayoutGuide.heightAnchor,
-                    multiplier: multDim
-                )
-            ].forEach { $0.isActive = true }
-            if idx == 0 {
+            canView.frame.size = CGSize(
+                width: self.agoraVideoHolder.bounds.width * multDim,
+                height: self.agoraVideoHolder.bounds.height * multDim
+            )
+            canView.frame.origin = .zero
+            if idx % Int(maxSqrt) != 0 {
                 // First video in the list, so just put it at the top left
-                [
-                    canView.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor),
-                    canView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
-                ].forEach { $0.isActive = true }
-            } else {
-                if (idx % Int(maxSqrt)) == 0 {
-                    // New row, so go to the far left, and align the top of this
-                    // view with the bottom of the previous view.
-                    canView.leftAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leftAnchor).isActive = true
-                    canView.topAnchor.constraint(equalTo: prevView!.bottomAnchor).isActive = true
-                } else {
-                    // Go to the end of current row
-                    canView.leftAnchor.constraint(equalTo: prevView!.rightAnchor).isActive = true
-                    canView.topAnchor.constraint(equalTo: prevView!.topAnchor).isActive = true
-                }
+                canView.frame.origin.x = CGFloat(idx % Int(maxSqrt)) * self.agoraVideoHolder.bounds.width / maxSqrt
             }
-            prevView = canView
+            let yMod = Int(CGFloat(idx) / maxSqrt) % Int(maxSqrt)
+            if yMod != 0 {
+                canView.frame.origin.y = CGFloat(yMod) * self.agoraVideoHolder.bounds.height / maxSqrt
+            }
+            canView.autoresizingMask = .all
         }
     }
 

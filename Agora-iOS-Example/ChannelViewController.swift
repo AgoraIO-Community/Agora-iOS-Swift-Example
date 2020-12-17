@@ -11,16 +11,15 @@ import AgoraRtcKit
 
 class ChannelViewController: UIViewController {
 
-    #error("change channelName and appId, then delete or comment this line")
-    static let channelName = "changeme"
-    static let appId = "changeme"
+    static let channelName: String = <#Static Channel Name#>
+    static let appId: String = <#Agora App ID#>
 
     /// Static token here, but can be dynamic if calling `joinChannelWithFetch` instead of `joinChannel`
     /// `joinChannelWithFetch` is found in AgoraToken.swift
-    static var channelToken = ""
+    /// Set to nil for no token required, or empty string to trigger a fetch from tokenBaseURL
+    static var channelToken: String? = <#Agora Token#>
 
-    #error("change tokenBaseURL, then delete or comment this line")
-    static var tokenBaseURL = "http://localhost:8080"
+    static var tokenBaseURL: String? = <#Base URL to fetch token#>
 
     /// Setting to zero will tell Agora to assign one for you
     lazy var userID: UInt = 0
@@ -62,28 +61,23 @@ class ChannelViewController: UIViewController {
         }
     }
 
-    lazy var videoView: UIView = {
+    /// Local video UIView, used only when broadcasting
+    lazy var localVideoView: UIView = {
         let vview = UIView()
-        vview.translatesAutoresizingMaskIntoConstraints = false
         return vview
     }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubview(self.agoraVideoHolder)
-        self.agoraVideoHolder.translatesAutoresizingMaskIntoConstraints = false
-        self.addVideoViews()
-        if ChannelViewController.channelToken.isEmpty {
+        self.agoraVideoHolder.frame = self.view.bounds
+        self.agoraVideoHolder.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        if ChannelViewController.channelToken != nil {
             // Fetch token if our current one is empty
             self.joinChannelWithFetch()
         } else {
             self.joinChannel()
         }
-    }
-
-    func addVideoViews() {
-        self.view.addSubview(self.videoView)
-        self.addVideoButtons()
     }
 
     required init() {

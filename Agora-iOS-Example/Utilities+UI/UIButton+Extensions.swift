@@ -29,3 +29,11 @@ extension UIButton {
         return button
     }
 }
+
+extension UIView.AutoresizingMask {
+    static var all: UIView.AutoresizingMask = [
+        .flexibleWidth, .flexibleHeight,
+        .flexibleLeftMargin, .flexibleRightMargin,
+        .flexibleTopMargin, .flexibleBottomMargin
+    ]
+}

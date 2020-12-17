@@ -13,19 +13,24 @@ extension ChannelViewController: AgoraRtcEngineDelegate {
         print("Agora Engine Video Stopped")
     }
 
+    /// Called when we get a new video feed from a remote user
+    /// - Parameters:
+    ///   - engine: Agora Engine.
+    ///   - uid: ID of the remote user.
+    ///   - size: Size of the video feed.
+    ///   - elapsed: Time elapsed (ms) from the remote user sharing their video until this callback fired.
     func rtcEngine(_ engine: AgoraRtcEngineKit, firstRemoteVideoDecodedOfUid uid: UInt, size: CGSize, elapsed: Int) {
         let videoCanvas = AgoraRtcVideoCanvas()
         videoCanvas.uid = uid
         let hostingView = UIView()
-        hostingView.translatesAutoresizingMaskIntoConstraints = false
-        self.view.addSubview(hostingView)
+        self.agoraVideoHolder.addSubview(hostingView)
         videoCanvas.view = hostingView
         videoCanvas.renderMode = .hidden
         self.agkit.setupRemoteVideo(videoCanvas)
         userVideoLookup[uid] = videoCanvas
     }
 
-    /// Called when the user role successfully changes
+    /// Called when the local user role successfully changes
     /// - Parameters:
     ///   - engine: AgoraRtcEngine of this session.
     ///   - oldRole: Previous role of the user.
@@ -40,11 +45,13 @@ extension ChannelViewController: AgoraRtcEngineDelegate {
         let isHost = newRole == .broadcaster
         hostButton.backgroundColor = isHost ? .systemGreen : .systemRed
         hostButton.setTitle("Host" + (isHost ? "ing" : ""), for: .normal)
-        if !isHost {
+        if isHost {
+            self.setupLocalAgoraVideo()
+        } else {
             userVideoLookup.removeValue(forKey: self.userID)
         }
 
-        // Only show the camera options when we are a broadcaster
+        // Only show the camera options when we are broadcasting
         self.getControlContainer().isHidden = !isHost
     }
 
@@ -53,7 +60,7 @@ extension ChannelViewController: AgoraRtcEngineDelegate {
         didJoinedOfUid uid: UInt,
         elapsed: Int
     ) {
-        // Keeping track of all people in the session
+        // Keeping track of all broadcasters in the session
         remoteUserIDs.insert(uid)
     }
 
@@ -78,15 +85,17 @@ extension ChannelViewController: AgoraRtcEngineDelegate {
         _ engine: AgoraRtcEngineKit,
         tokenPrivilegeWillExpire token: String
     ) {
-        AgoraToken.fetchToken(
-            urlBase: ChannelViewController.tokenBaseURL,
-            channelName: ChannelViewController.channelName,
-            userId: self.userID) { result in
-            switch result {
-            case .failure(let err):
-                fatalError("Could not refresh token: \(err)")
-            case .success(let newToken):
-                self.updateToken(newToken)
+        if let tokenURL = ChannelViewController.tokenBaseURL {
+            AgoraToken.fetchToken(
+                urlBase: tokenURL,
+                channelName: ChannelViewController.channelName,
+                userId: self.userID) { result in
+                switch result {
+                case .failure(let err):
+                    fatalError("Could not refresh token: \(err)")
+                case .success(let newToken):
+                    self.updateToken(newToken)
+                }
             }
         }
     }

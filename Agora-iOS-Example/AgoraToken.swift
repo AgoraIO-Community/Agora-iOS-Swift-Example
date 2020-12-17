@@ -11,9 +11,12 @@ import UIKit
 extension ChannelViewController {
     /// Join the Agora channel by first fetching the token.
     @objc func joinChannelWithFetch() {
-        self.setupAgoraVideo()
+        guard let tokenURL = ChannelViewController.tokenBaseURL else {
+            return
+        }
+        self.agkit.enableVideo()
         AgoraToken.fetchToken(
-            urlBase: ChannelViewController.tokenBaseURL,
+            urlBase: tokenURL,
             channelName: ChannelViewController.channelName,
             userId: self.userID
         ) { result in

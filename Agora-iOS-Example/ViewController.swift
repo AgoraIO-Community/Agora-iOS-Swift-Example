@@ -34,18 +34,16 @@ class ViewController: UIViewController {
         button.backgroundColor = .systemGray
         button.addTarget(self, action: #selector(showChannelView), for: .touchUpInside)
         self.view.addSubview(button)
-
-        button.translatesAutoresizingMaskIntoConstraints = false
-        [
-            button.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            button.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
-            button.widthAnchor.constraint(equalToConstant: 150),
-            button.heightAnchor.constraint(equalToConstant: 50)
-        ].forEach { $0.isActive = true}
+        button.frame = CGRect(
+            origin: CGPoint(x: self.view.bounds.width / 2 - 75, y: self.view.bounds.height / 2 - 25),
+            size: CGSize(width: 150, height: 50)
+        )
+        button.autoresizingMask = [
+            .flexibleTopMargin, .flexibleBottomMargin, .flexibleLeftMargin, .flexibleRightMargin
+        ]
 
         button.backgroundColor = .systemGreen
         button.layer.cornerRadius = 25
         self.joinButton = button
     }
-
 }
