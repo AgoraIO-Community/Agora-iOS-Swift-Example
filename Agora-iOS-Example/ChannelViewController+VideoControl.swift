@@ -43,7 +43,9 @@ extension ChannelViewController {
         let beautifyButton = self.getBeautifyButton()
         beautifyButton.isSelected.toggle()
         beautifyButton.backgroundColor = beautifyButton.isSelected ? .systemGreen : .systemGray
-        self.agkit.setLocalVoiceChanger(beautifyButton.isSelected ? .voiceBeautyClear : .voiceChangerOff)
+        self.agkit.setVoiceBeautifierPreset(
+            beautifyButton.isSelected ? .timbreTransformationClear : .voiceBeautifierOff
+        )
         self.agkit.setBeautyEffectOptions(beautifyButton.isSelected, options: self.beautyOptions)
     }
 
@@ -109,8 +111,8 @@ extension ChannelViewController {
         }
         let vidCounts = userVideoLookup.count
 
-        // I'm always applying an NxN grid, so if there are 12
-        // We take on a grid of 4x4 (16).
+        // Always applying an NxN grid, so if there are 12
+        // We take on a grid of 4x4 (showing up to 16 cells).
         let maxSqrt = ceil(sqrt(CGFloat(vidCounts)))
         let multDim = 1 / maxSqrt
         for (idx, (_, canvas)) in userVideoLookup.enumerated() {
@@ -127,11 +129,12 @@ extension ChannelViewController {
             )
             canView.frame.origin = .zero
             if idx % Int(maxSqrt) != 0 {
-                // First video in the list, so just put it at the top left
+                // If not the first in the row, find the offset from the left of the view
                 canView.frame.origin.x = CGFloat(idx % Int(maxSqrt)) * self.agoraVideoHolder.bounds.width / maxSqrt
             }
             let yMod = Int(CGFloat(idx) / maxSqrt) % Int(maxSqrt)
             if yMod != 0 {
+                // If not the first row, find the offset from the top of the view
                 canView.frame.origin.y = CGFloat(yMod) * self.agoraVideoHolder.bounds.height / maxSqrt
             }
             canView.autoresizingMask = .all
