@@ -3,11 +3,10 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
-		8A24FA019D5C8D5C3B38AC02 /* Pods_Agora_iOS_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C52045C48C858536550BD9 /* Pods_Agora_iOS_Example.framework */; };
 		F324AE9E2534705500D788AA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F324AE9D2534705500D788AA /* AppDelegate.swift */; };
 		F324AEA02534705500D788AA /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F324AE9F2534705500D788AA /* SceneDelegate.swift */; };
 		F324AEA22534705500D788AA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F324AEA12534705500D788AA /* ViewController.swift */; };
@@ -20,12 +19,10 @@
 		F324AEE52534734A00D788AA /* UIButton+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F324AEE22534734A00D788AA /* UIButton+Extensions.swift */; };
 		F324AEE62534734A00D788AA /* ChannelViewController+Buttons.swift in Sources */ = {isa = PBXBuildFile; fileRef = F324AEE32534734A00D788AA /* ChannelViewController+Buttons.swift */; };
 		F324AEE72534734A00D788AA /* ChannelViewController+Permissions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F324AEE42534734A00D788AA /* ChannelViewController+Permissions.swift */; };
+		F353FEC226D0088800EDAA9C /* AgoraRtcKit in Frameworks */ = {isa = PBXBuildFile; productRef = F353FEC126D0088800EDAA9C /* AgoraRtcKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		14C52045C48C858536550BD9 /* Pods_Agora_iOS_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Agora_iOS_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		5D3C3A6A6478124545F3B21A /* Pods-Agora-iOS-Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agora-iOS-Example.debug.xcconfig"; path = "Target Support Files/Pods-Agora-iOS-Example/Pods-Agora-iOS-Example.debug.xcconfig"; sourceTree = "<group>"; };
-		D5A79A6891AC6DB0EC0069CC /* Pods-Agora-iOS-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Agora-iOS-Example.release.xcconfig"; path = "Target Support Files/Pods-Agora-iOS-Example/Pods-Agora-iOS-Example.release.xcconfig"; sourceTree = "<group>"; };
 		F324AE9A2534705500D788AA /* Agora-iOS-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Agora-iOS-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F324AE9D2534705500D788AA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F324AE9F2534705500D788AA /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,37 +44,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8A24FA019D5C8D5C3B38AC02 /* Pods_Agora_iOS_Example.framework in Frameworks */,
+				F353FEC226D0088800EDAA9C /* AgoraRtcKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		31487E40E063951BD18F9088 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5D3C3A6A6478124545F3B21A /* Pods-Agora-iOS-Example.debug.xcconfig */,
-				D5A79A6891AC6DB0EC0069CC /* Pods-Agora-iOS-Example.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
-		7AC7C3EC381833A5D47122B9 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				14C52045C48C858536550BD9 /* Pods_Agora_iOS_Example.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		F324AE912534705500D788AA = {
 			isa = PBXGroup;
 			children = (
 				F324AE9C2534705500D788AA /* Agora-iOS-Example */,
 				F324AE9B2534705500D788AA /* Products */,
-				31487E40E063951BD18F9088 /* Pods */,
-				7AC7C3EC381833A5D47122B9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -124,17 +102,18 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F324AEC42534705900D788AA /* Build configuration list for PBXNativeTarget "Agora-iOS-Example" */;
 			buildPhases = (
-				4EB42F8ADC246F69D48CA400 /* [CP] Check Pods Manifest.lock */,
 				F324AE962534705500D788AA /* Sources */,
 				F324AE972534705500D788AA /* Frameworks */,
 				F324AE982534705500D788AA /* Resources */,
-				F9F875CA5ED609E081E1CEB3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = "Agora-iOS-Example";
+			packageProductDependencies = (
+				F353FEC126D0088800EDAA9C /* AgoraRtcKit */,
+			);
 			productName = "Agora-iOS-Example";
 			productReference = F324AE9A2534705500D788AA /* Agora-iOS-Example.app */;
 			productType = "com.apple.product-type.application";
@@ -162,6 +141,9 @@
 				Base,
 			);
 			mainGroup = F324AE912534705500D788AA;
+			packageReferences = (
+				F353FEC026D0088800EDAA9C /* XCRemoteSwiftPackageReference "AgoraRtcEngine_iOS" */,
+			);
 			productRefGroup = F324AE9B2534705500D788AA /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -182,48 +164,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		4EB42F8ADC246F69D48CA400 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Agora-iOS-Example-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F9F875CA5ED609E081E1CEB3 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Agora-iOS-Example/Pods-Agora-iOS-Example-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Agora-iOS-Example/Pods-Agora-iOS-Example-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Agora-iOS-Example/Pods-Agora-iOS-Example-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F324AE962534705500D788AA /* Sources */ = {
@@ -375,17 +315,17 @@
 		};
 		F324AEC52534705900D788AA /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5D3C3A6A6478124545F3B21A /* Pods-Agora-iOS-Example.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 278494H572;
 				INFOPLIST_FILE = "Agora-iOS-Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = uk.rocketar.agoraiosexample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -394,17 +334,17 @@
 		};
 		F324AEC62534705900D788AA /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D5A79A6891AC6DB0EC0069CC /* Pods-Agora-iOS-Example.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 278494H572;
 				INFOPLIST_FILE = "Agora-iOS-Example/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = uk.rocketar.agoraiosexample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -433,6 +373,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F353FEC026D0088800EDAA9C /* XCRemoteSwiftPackageReference "AgoraRtcEngine_iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "git@github.com:AgoraIO/AgoraRtcEngine_iOS.git";
+			requirement = {
+				kind = exactVersion;
+				version = "3.5.0-hotfix.2";
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F353FEC126D0088800EDAA9C /* AgoraRtcKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F353FEC026D0088800EDAA9C /* XCRemoteSwiftPackageReference "AgoraRtcEngine_iOS" */;
+			productName = AgoraRtcKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = F324AE922534705500D788AA /* Project object */;
 }
