@@ -24,7 +24,6 @@ extension ChannelViewController {
         _ = self.getBeautifyButton()
     }
 
-
     func getControlContainer() -> UIView {
         if let controlContainer = self.controlContainer {
             return controlContainer
