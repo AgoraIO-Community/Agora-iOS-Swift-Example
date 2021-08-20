@@ -25,15 +25,11 @@ The project will manage any number of hosts, and will always order them in an Nx
 ## Running the app
 
 ### Prerequisites
-- Xcode 11.0
-- CocoaPods
+- Xcode 12.0
 - iOS Device (iOS 13.0 required due to use of SF Symbols)
 - A Token Server (see below)
 
-You'll need to install the Agora CocoaPod to run this app to generate the xcworkspace.<br>
-To do so, simply run `pod install`
-
-Then open the xcworkspace, edit the Signing team to a profile you have installed locally.
+On opening `Agora-iOS-Example.xcodeproj` there may be an issue downloading the swift package. If there is, select `File > Swift Packages > Reset Package Caches`.
 
 Once there you will be prompted (on building) to update several properties, including the channelName, appId, and tokenBaseURL.
 
