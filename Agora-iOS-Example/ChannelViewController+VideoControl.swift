@@ -44,7 +44,7 @@ extension ChannelViewController {
         beautifyButton.isSelected.toggle()
         beautifyButton.backgroundColor = beautifyButton.isSelected ? .systemGreen : .systemGray
         self.agkit.setVoiceBeautifierPreset(
-            beautifyButton.isSelected ? .timbreTransformationClear : .voiceBeautifierOff
+            beautifyButton.isSelected ? .timbreTransformationClear : .presetOff
         )
         self.agkit.setBeautyEffectOptions(beautifyButton.isSelected, options: self.beautyOptions)
     }
@@ -80,7 +80,8 @@ extension ChannelViewController {
         self.agkit.joinChannel(
             byToken: ChannelViewController.channelToken,
             channelId: ChannelViewController.channelName,
-            info: nil, uid: self.userID
+            uid: self.userID,
+            mediaOptions: AgoraRtcChannelMediaOptions()
         ) { [weak self] _, uid, _ in
             self?.userID = uid
             self?.getHostButton().isHidden = false

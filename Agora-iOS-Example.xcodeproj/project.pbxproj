@@ -379,8 +379,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "git@github.com:AgoraIO/AgoraRtcEngine_iOS.git";
 			requirement = {
-				kind = exactVersion;
-				version = "3.5.0-hotfix.2";
+				branch = "ngsdk-beta";
+				kind = branch;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
